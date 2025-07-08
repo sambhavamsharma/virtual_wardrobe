@@ -65,23 +65,6 @@ npm run dev
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 👨‍💻 Author
-
-**Your Name**
-- GitHub: [@yourusername](https://github.com/yourusername)
-- LinkedIn: [Your LinkedIn](https://linkedin.com/in/yourprofile)
-- Email: your.email@example.com
-
-## 🙏 Acknowledgments
-
-- Thanks to [Pexels](https://pexels.com) for providing stock images
-- Icons by [Lucide](https://lucide.dev)
-- Built with [Vite](https://vitejs.dev) and [React](https://reactjs.org)
-
----
 
 ⭐ Star this repository if you found it helpful!
