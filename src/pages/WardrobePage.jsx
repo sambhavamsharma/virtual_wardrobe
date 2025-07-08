@@ -1,26 +1,21 @@
 import React, { useState } from 'react';
-import { User } from '../types/User';
 import { ImageUpload } from '../components/ImageUpload';
 import { ClothingGrid } from '../components/ClothingGrid';
 import { VirtualTryOn } from '../components/VirtualTryOn';
 import { Upload, Sparkles, Shirt, Camera } from 'lucide-react';
 
-interface WardrobePageProps {
-  user: User;
-}
+export const WardrobePage = ({ user }) => {
+  const [userImage, setUserImage] = useState(user.uploadedImage || null);
+  const [selectedClothing, setSelectedClothing] = useState([]);
+  const [activeTab, setActiveTab] = useState('upload');
+  const [currentTryOnClothing, setCurrentTryOnClothing] = useState(null);
 
-export const WardrobePage: React.FC<WardrobePageProps> = ({ user }) => {
-  const [userImage, setUserImage] = useState<string | null>(user.uploadedImage || null);
-  const [selectedClothing, setSelectedClothing] = useState<string[]>([]);
-  const [activeTab, setActiveTab] = useState<'upload' | 'clothes' | 'preview'>('upload');
-  const [currentTryOnClothing, setCurrentTryOnClothing] = useState<string | null>(null);
-
-  const handleImageUpload = (image: string) => {
+  const handleImageUpload = (image) => {
     setUserImage(image);
     setActiveTab('clothes');
   };
 
-  const handleClothingSelect = (clothingId: string) => {
+  const handleClothingSelect = (clothingId) => {
     setSelectedClothing(prev => 
       prev.includes(clothingId) 
         ? prev.filter(id => id !== clothingId)
@@ -28,7 +23,7 @@ export const WardrobePage: React.FC<WardrobePageProps> = ({ user }) => {
     );
   };
 
-  const handleInstantTryOn = (clothingId: string) => {
+  const handleInstantTryOn = (clothingId) => {
     setCurrentTryOnClothing(clothingId);
     setActiveTab('preview');
   };

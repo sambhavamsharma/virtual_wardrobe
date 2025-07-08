@@ -1,13 +1,7 @@
 import React, { useState } from 'react';
 import { X, User, Mail, Lock, Eye, EyeOff } from 'lucide-react';
-import { User as UserType } from '../types/User';
 
-interface AuthModalProps {
-  onClose: () => void;
-  onLogin: (user: UserType) => void;
-}
-
-export const AuthModal: React.FC<AuthModalProps> = ({ onClose, onLogin }) => {
+export const AuthModal = ({ onClose, onLogin }) => {
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({
     name: '',
@@ -18,14 +12,14 @@ export const AuthModal: React.FC<AuthModalProps> = ({ onClose, onLogin }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     
     // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1000));
     
-    const user: UserType = {
+    const user = {
       id: Math.random().toString(36).substr(2, 9),
       email: formData.email,
       name: formData.name || formData.email.split('@')[0],

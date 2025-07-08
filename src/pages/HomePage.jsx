@@ -1,13 +1,7 @@
 import React from 'react';
 import { Sparkles, Upload, Zap, ArrowRight, Camera, Shirt } from 'lucide-react';
-import { User } from '../types/User';
 
-interface HomePageProps {
-  onGetStarted: () => void;
-  user: User | null;
-}
-
-export const HomePage: React.FC<HomePageProps> = ({ onGetStarted, user }) => {
+export const HomePage = ({ onGetStarted, user }) => {
   const features = [
     {
       icon: <Camera className="w-8 h-8 text-purple-500" />,

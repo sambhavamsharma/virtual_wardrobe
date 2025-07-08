@@ -1,16 +1,7 @@
 import React from 'react';
 import { User, ShoppingBag, LogOut, Home, User as UserIcon } from 'lucide-react';
-import { User as UserType } from '../types/User';
 
-interface HeaderProps {
-  user: UserType | null;
-  currentPage: 'home' | 'wardrobe' | 'profile';
-  onPageChange: (page: 'home' | 'wardrobe' | 'profile') => void;
-  onLogin: () => void;
-  onLogout: () => void;
-}
-
-export const Header: React.FC<HeaderProps> = ({ 
+export const Header = ({ 
   user, 
   currentPage, 
   onPageChange, 

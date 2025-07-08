@@ -1,16 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { User } from '../types/User';
 import { Save, Share2, Download, Sparkles, RefreshCw, Zap, ArrowLeft } from 'lucide-react';
 
-interface VirtualTryOnProps {
-  userImage: string;
-  selectedClothing: string[];
-  user: User;
-  currentClothingId?: string;
-  onBack: () => void;
-}
-
-export const VirtualTryOn: React.FC<VirtualTryOnProps> = ({ 
+export const VirtualTryOn = ({ 
   userImage, 
   selectedClothing, 
   user,
@@ -18,7 +9,7 @@ export const VirtualTryOn: React.FC<VirtualTryOnProps> = ({
   onBack
 }) => {
   const [isProcessing, setIsProcessing] = useState(true);
-  const [currentLook, setCurrentLook] = useState<string | null>(null);
+  const [currentLook, setCurrentLook] = useState(null);
   const [processingText, setProcessingText] = useState('Analyzing your photo...');
 
   useEffect(() => {
@@ -55,7 +46,7 @@ export const VirtualTryOn: React.FC<VirtualTryOnProps> = ({
   const handleSaveLook = () => {
     console.log('Saving look for user:', user.id);
     // Create a nice success animation
-    const button = document.activeElement as HTMLButtonElement;
+    const button = document.activeElement;
     if (button) {
       button.innerHTML = '✓ Saved!';
       button.classList.add('bg-green-500');
@@ -67,15 +58,20 @@ export const VirtualTryOn: React.FC<VirtualTryOnProps> = ({
   };
 
   const handleShareLook = () => {
-    navigator.share?.({
-      title: 'Check out my virtual try-on!',
-      text: 'I tried on this outfit using AI - what do you think?',
-      url: window.location.href
-    }).catch(() => {
-      // Fallback for browsers without Web Share API
+    if (navigator.share) {
+      navigator.share({
+        title: 'Check out my virtual try-on!',
+        text: 'I tried on this outfit using AI - what do you think?',
+        url: window.location.href
+      }).catch(() => {
+        // Fallback for browsers without Web Share API
+        navigator.clipboard.writeText(window.location.href);
+        alert('Link copied to clipboard!');
+      });
+    } else {
       navigator.clipboard.writeText(window.location.href);
       alert('Link copied to clipboard!');
-    });
+    }
   };
 
   const handleDownload = () => {

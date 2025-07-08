@@ -1,12 +1,7 @@
 import React from 'react';
-import { User } from '../types/User';
 import { Heart, Calendar, Settings, Zap, TrendingUp, Camera, Shirt } from 'lucide-react';
 
-interface ProfilePageProps {
-  user: User;
-}
-
-export const ProfilePage: React.FC<ProfilePageProps> = ({ user }) => {
+export const ProfilePage = ({ user }) => {
   const stats = [
     { icon: <Heart className="w-6 h-6" />, label: "Saved Looks", value: user.savedLooks.length, color: "text-red-500" },
     { icon: <Shirt className="w-6 h-6" />, label: "Items Tried", value: "47", color: "text-blue-500" },

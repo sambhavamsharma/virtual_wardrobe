@@ -1,17 +1,12 @@
 import React, { useState, useRef } from 'react';
 import { Upload, Camera, X, Check, Sparkles, Zap } from 'lucide-react';
 
-interface ImageUploadProps {
-  onImageUpload: (image: string) => void;
-  currentImage: string | null;
-}
-
-export const ImageUpload: React.FC<ImageUploadProps> = ({ onImageUpload, currentImage }) => {
+export const ImageUpload = ({ onImageUpload, currentImage }) => {
   const [dragActive, setDragActive] = useState(false);
-  const [preview, setPreview] = useState<string | null>(currentImage);
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [preview, setPreview] = useState(currentImage);
+  const fileInputRef = useRef(null);
 
-  const handleDrag = (e: React.DragEvent) => {
+  const handleDrag = (e) => {
     e.preventDefault();
     e.stopPropagation();
     if (e.type === "dragenter" || e.type === "dragover") {
@@ -21,7 +16,7 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({ onImageUpload, current
     }
   };
 
-  const handleDrop = (e: React.DragEvent) => {
+  const handleDrop = (e) => {
     e.preventDefault();
     e.stopPropagation();
     setDragActive(false);
@@ -32,18 +27,18 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({ onImageUpload, current
     }
   };
 
-  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileSelect = (e) => {
     const files = e.target.files;
     if (files && files[0]) {
       handleFile(files[0]);
     }
   };
 
-  const handleFile = (file: File) => {
+  const handleFile = (file) => {
     if (file.type.startsWith('image/')) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        const result = e.target?.result as string;
+        const result = e.target?.result;
         setPreview(result);
       };
       reader.readAsDataURL(file);

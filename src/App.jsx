@@ -4,11 +4,10 @@ import { AuthModal } from './components/AuthModal';
 import { HomePage } from './pages/HomePage';
 import { WardrobePage } from './pages/WardrobePage';
 import { ProfilePage } from './pages/ProfilePage';
-import { User } from './types/User';
 
 function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'wardrobe' | 'profile'>('home');
-  const [user, setUser] = useState<User | null>(null);
+  const [currentPage, setCurrentPage] = useState('home');
+  const [user, setUser] = useState(null);
   const [showAuthModal, setShowAuthModal] = useState(false);
 
   // Check for saved user on load
@@ -19,7 +18,7 @@ function App() {
     }
   }, []);
 
-  const handleLogin = (userData: User) => {
+  const handleLogin = (userData) => {
     setUser(userData);
     localStorage.setItem('virtualWardrobeUser', JSON.stringify(userData));
     setShowAuthModal(false);

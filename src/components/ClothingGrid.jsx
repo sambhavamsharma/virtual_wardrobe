@@ -1,25 +1,17 @@
 import React, { useState, useMemo } from 'react';
-import { ClothingItem } from '../types/Clothing';
 import { Filter, Search, Heart, Sparkles, Zap } from 'lucide-react';
 
-interface ClothingGridProps {
-  selectedClothing: string[];
-  onClothingSelect: (id: string) => void;
-  onInstantTryOn: (clothingId: string) => void;
-  hasUserImage: boolean;
-}
-
-export const ClothingGrid: React.FC<ClothingGridProps> = ({ 
+export const ClothingGrid = ({ 
   selectedClothing, 
   onClothingSelect, 
   onInstantTryOn,
   hasUserImage
 }) => {
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
 
   // Mock clothing data
-  const clothingItems: ClothingItem[] = [
+  const clothingItems = [
     {
       id: '1',
       name: 'Classic White Tee',
@@ -113,7 +105,7 @@ export const ClothingGrid: React.FC<ClothingGridProps> = ({
     });
   }, [selectedCategory, searchTerm]);
 
-  const handleClothingClick = (item: ClothingItem) => {
+  const handleClothingClick = (item) => {
     if (hasUserImage) {
       onInstantTryOn(item.id);
     } else {
